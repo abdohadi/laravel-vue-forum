@@ -3,20 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-
-        <style>
-            body {
-                font-family: 'Nunito';
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
+    
     <body>
         <div id="app">
             {{-- @if (Route::has('login'))
@@ -33,9 +30,19 @@
                 </div>
             @endif --}}
 
-            <router-link :to="{ name: 'home' }">home</router-link>
+            <app>
+                <template v-slot:header v-if="$route.name != 'not-found'">
+                    <header-component></header-component>
+                </template>
 
-            <router-view></router-view>
+                <template v-slot:default>
+                    <router-view></router-view>
+                </template>
+
+                <template v-slot:footer v-if="$route.name != 'not-found'">
+                    <footer-component></footer-component>
+                </template>
+            </app>
         </div>
     </body>
 
