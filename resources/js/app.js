@@ -12,9 +12,7 @@ import Footer from './components/layouts/Footer';
 
 const app = createApp({
 	components: { App, Home, 'header-component': Header, 'footer-component': Footer },
-	created() {
-	}
-})
+});
 
 const router = createRouter(routes);
 

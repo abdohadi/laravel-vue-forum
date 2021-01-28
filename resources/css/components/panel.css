@@ -1,0 +1,11 @@
+.panel {
+	@apply bg-white md:w-6/12 mx-auto mb-6 p-4 border;
+}
+
+.panel-heading {
+	@apply p-3 border-b pb-6;
+}
+
+.panel-body {
+	@apply mt-3;
+}

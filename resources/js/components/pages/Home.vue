@@ -9,7 +9,4 @@
 </script>
 
 <style>
-	h2 {
-		color: green;
-	}
 </style>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Thread;
 use Illuminate\Http\Request;
+use App\Http\Resources\ThreadResource;
 
 class ThreadController extends Controller
 {
@@ -14,17 +15,7 @@ class ThreadController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return ThreadResource::collection(Thread::all());
     }
 
     /**
@@ -41,33 +32,22 @@ class ThreadController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Thread  $thread
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Thread $thread)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Thread $thread)
-    {
-        //
+        return new ThreadResource(Thread::find($id));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Thread  $thread
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Thread $thread)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +55,10 @@ class ThreadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Thread  $thread
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy($id)
     {
         //
     }

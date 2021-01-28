@@ -46,5 +46,29 @@
         </div>
     </body>
 
+    @php
+    $routeCollection = Route::getRoutes();
+    $allRoutes = [];
+    foreach ($routeCollection as $value) {
+        $allRoutes[$value->getName()] = $value->uri();
+    }
+    @endphp
+
+    <script>
+        window.allRoutes = <?php echo json_encode($allRoutes); ?>;
+
+        window.getRoute = function(name, params = null) {      // getRoute('posts.users', { post: 1, user: 2 })
+            var uri = allRoutes[name];
+
+            if (params) {
+                for (const [param, value] of Object.entries(params)) {
+                    uri = uri.replace(`{${param}}`, value);
+                }
+            }
+            
+            return `/${uri}`;
+        }
+    </script>
+
     <script src="{{ asset('js/app.js') }}"></script>
 </html>
