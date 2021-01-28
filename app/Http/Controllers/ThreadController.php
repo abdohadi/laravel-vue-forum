@@ -15,7 +15,7 @@ class ThreadController extends Controller
      */
     public function index()
     {
-        return ThreadResource::collection(Thread::all());
+        return Thread::all()->toJson();
     }
 
     /**
@@ -35,9 +35,14 @@ class ThreadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        return new ThreadResource(Thread::find($id));
+    public function show(Thread $thread)
+    {;
+        return [
+            'thread' => $thread,
+            'replies' => $thread->replies()->with('user')->get()
+        ];
+
+        
     }
 
     /**
